@@ -85,7 +85,6 @@ export default {
                 })
 
                 this.$router.push({ name: 'home' });
-
             })
             .catch( error => this.errors = error.response.data.errors)
             .catch(

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeController;
 
 Route::group([
 
@@ -16,3 +17,5 @@ Route::group([
     Route::post('/me', [AuthController::class, 'me']);
 
 });
+
+Route::apiResource('/employee', 'Api/EmployeeController::class');
