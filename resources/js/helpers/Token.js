@@ -5,7 +5,7 @@ class Token {
 
         if (payload) {
             // E a treia parte a unui token:
-            return payload.iss = "http://127.0.0.1:8000/api/auth/login" || "http://127.0.0.1:8000/api/auth/signup" ? true : false;
+            return payload.iss = "http://127.0.0.1:8000/api/auth/login" || "http://127.0.0.1:8000/api/auth/register" ? true : false;
         }
         return false;
     }
