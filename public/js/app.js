@@ -36866,17 +36866,17 @@ var render = function () {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.form.address,
-                                  expression: "form.address",
+                                  value: _vm.form.joining_date,
+                                  expression: "form.joining_date",
                                 },
                               ],
                               staticClass: "form-control",
                               attrs: {
                                 type: "date",
-                                id: "exampleInputjoining_date",
-                                placeholder: "Enter Your Joining Date",
+                                id: "exampleInputjoining_joining_date",
+                                placeholder: "Enter Your Joining Joining Date",
                               },
-                              domProps: { value: _vm.form.address },
+                              domProps: { value: _vm.form.joining_date },
                               on: {
                                 input: function ($event) {
                                   if ($event.target.composing) {
@@ -36884,7 +36884,7 @@ var render = function () {
                                   }
                                   _vm.$set(
                                     _vm.form,
-                                    "address",
+                                    "joining_date",
                                     $event.target.value
                                   )
                                 },

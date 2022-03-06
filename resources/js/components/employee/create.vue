@@ -53,8 +53,8 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <input type="date" class="form-control" id="exampleInputjoining_date"
-                                                    placeholder="Enter Your Joining Date" v-model="form.address">
+                                                    <input type="date" class="form-control" id="exampleInputjoining_joining_date"
+                                                    placeholder="Enter Your Joining Joining Date" v-model="form.joining_date">
                                                     <small class="text-danger" v-if="errors.joining_date"> {{ errors.joining_date[0] }} </small>
                                                 </div>
 
@@ -151,7 +151,7 @@ export default {
                 };
                 reader.readAsDataURL(file);
             }
-        }
+        },
     },
 }
 </script>
