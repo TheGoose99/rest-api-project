@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use Image;
+use DB;
 
 class EmployeeController extends Controller
 {
@@ -79,7 +80,9 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        
+        $employee = DB::table('employees')->where('id', $id)->first();
+
+        return response()->json($employee);
     }
 
     /**
@@ -102,6 +105,14 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        
+        $employee = DB::table('employees')->where('id', $id)->first();
+        $photo = $employee->photo;
+
+        if($photo) {
+            unlink($photo);
+            DB::table('employees')->where('id', $id)->delete();
+        } else {
+            DB::table('employees')->where('id', $id)->delete();
+        }
     }
 }
