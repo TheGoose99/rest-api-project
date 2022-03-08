@@ -331,15 +331,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script type="text/javascript">
-        let token = localStorage.getItem('token');
-
-        if(token) {
-            $("#sidebar").css("display", "");
-            $("#topbar").css("display", "");
-        }
-    </script>
-
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -347,6 +338,15 @@
     <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
     <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('backend/js/demo/chart-area-demo.js') }}"></script>
+
+    <script type="text/javascript" language="JavaScript">
+        let token = localStorage.getItem('token');
+
+        if(token) {
+            $("#topbar").css("display", "");
+            $("#sidebar").css("display", "");
+        }
+    </script>
 </body>
 
 </html>

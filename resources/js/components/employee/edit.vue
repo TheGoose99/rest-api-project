@@ -16,8 +16,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Employee Update</h1>
                                     </div>
-                                    <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
 
+                                    <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
@@ -84,14 +84,14 @@
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                 </div>
 
-                                            <div class="col-md-6">
-                                                <img :src="form.photo" alt="Error" style="height: 40px; width: 40px;">
-                                            </div>
+                                                <div class="col-md-6">
+                                                    <img :src="url" id="em_photo" v-if="url">
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Update</button>
                                         </div>
                                     </form>
 
@@ -110,58 +110,63 @@ export default {
     // Daca este deja logat cu un token user-ul:
     created() {
         if(!User.loggedIn()) {
-            this.$router.push({ name: 'home' });
+            this.$router.push({ name: '/' });
         }
     },
     data() {
         return {
             form: {
-                name: null,
-                email: null,
-                phone: null,
-                salary: null,
-                address: null,
-                nid: null,
-                photo: null,
-                joining_date: null,
+                name: '',
+                email: '',
+                phone: '',
+                salary: '',
+                address: '',
+                nid: '',
+                photo: '',
+                newphoto: '',
+                joining_date: ''
             },
             errors: {},
+            url: null,
         }
     },
     created() {
-      let id = this.$route.params.id;
-      axios.get('/api/employee/'+id)
-      .then(({data}) => (this.form = data))
-      .catch(console.log('error'))
+        let id = this.$route.params.id
+
+        axios.get('/api/employee/'+id)
+        .then(({data}) => (this.form = data))
+        .catch( console.log('error'))
     },
     methods: {
-        employeeInsert() {
-            axios.post('/api/employee', this.form)
+        onFileSelected(event) {
+            let file = event.target.files[0];
+            if(file.size > 1048770) {
+                Notification.image_validation()
+            } else {
+                let reader = new FileReader();
+                reader.onload = event =>{
+                    this.form.newphoto = event.target.result
+                };
+                reader.readAsDataURL(file);
+                this.url = URL.createObjectURL(file);
+            }
+        },
+        employeeUpdate() {
+            let id = this.$route.params.id;
+            axios.patch('/api/employee/'+id, this.form)
             .then(() => {
                 this.$router.push({ name: 'employee' })
                 Notification.success()
             })
-            .catch(error =>this.errors = error.response.data.errors )
-        },
-        onFileSelected(event) {
-            let file = event.target.files[0];
-
-            if(file.size > 1048770) {
-                Notification.image_validation();
-            } else {
-                let reader = new FileReader();
-
-                reader.onload = event =>{
-                    this.form.photo = event.target.result;
-                    console.log(event.target.result)
-                };
-                reader.readAsDataURL(file);
-            }
+            .catch(error =>this.errors = error.response.data.errors)
         },
     },
 }
 </script>
 
 <style type="text/css">
-
+    #em_photo {
+        height: 240px;
+        width: 200px;
+    }
 </style>
