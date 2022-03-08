@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-sm">
-                <router-link to="/employee" class="btn btn-primary"> All Employee </router-link>
+                <router-link to="/supplier" class="btn btn-primary"> All Supplier </router-link>
             </div>
         </div>
 
@@ -14,10 +14,10 @@
                             <div class="col-lg-12">
                                 <div class="login-form">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Employee Update</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Add Supplier</h1>
                                     </div>
+                                    <form class="user" @submit.prevent="supplierInsert" enctype="multipart/form-data">
 
-                                    <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
@@ -44,24 +44,8 @@
 
                                                 <div class="col-md-6">
                                                     <input type="text" class="form-control" id="exampleInputSalary"
-                                                    placeholder="Enter Your Salary" v-model="form.salary">
-                                                    <small class="text-danger" v-if="errors.salary"> {{ errors.salary[0] }} </small>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <input type="date" class="form-control" id="exampleInputjoining_joining_date"
-                                                    placeholder="Enter Your Joining Joining Date" v-model="form.joining_date">
-                                                    <small class="text-danger" v-if="errors.joining_date"> {{ errors.joining_date[0] }} </small>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="exampleInputNid"
-                                                    placeholder="Enter Your Nid" v-model="form.nid">
-                                                    <small class="text-danger" v-if="errors.nid"> {{ errors.nid[0] }} </small>
+                                                    placeholder="Enter Your Shop Name" v-model="form.shopname">
+                                                    <small class="text-danger" v-if="errors.shopname"> {{ errors.shopname[0] }} </small>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,14 +68,14 @@
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <img :src="url" id="em_photo" v-if="url">
-                                                </div>
+                                            <div class="col-md-6">
+                                                <img :src="form.photo" alt="Error" style="height: 40px; width: 40px;">
+                                            </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Update</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
                                         </div>
                                     </form>
 
@@ -110,63 +94,49 @@ export default {
     // Daca este deja logat cu un token user-ul:
     created() {
         if(!User.loggedIn()) {
-            this.$router.push({ name: '/' });
+            this.$router.push({ name: 'home' });
         }
     },
     data() {
         return {
             form: {
-                name: '',
-                email: '',
-                phone: '',
-                salary: '',
-                address: '',
-                nid: '',
-                photo: '',
-                newphoto: '',
-                joining_date: ''
+                name: null,
+                email: null,
+                phone: null,
+                shopname: null,
+                address: null,
+                photo: null
             },
             errors: {},
-            url: null,
         }
     },
-    created() {
-        let id = this.$route.params.id
-
-        axios.get('/api/employee/'+id)
-        .then(({data}) => (this.form = data))
-        .catch(error =>this.errors = error.response.data.errors)
-    },
     methods: {
-        onFileSelected(event) {
-            let file = event.target.files[0];
-            if(file.size > 1048770) {
-                Notification.image_validation()
-            } else {
-                let reader = new FileReader();
-                reader.onload = event =>{
-                    this.form.newphoto = event.target.result
-                };
-                reader.readAsDataURL(file);
-                this.url = URL.createObjectURL(file);
-            }
-        },
-        employeeUpdate() {
-            let id = this.$route.params.id;
-            axios.patch('/api/employee/'+id, this.form)
+        supplierInsert() {
+            axios.post('/api/supplier', this.form)
             .then(() => {
-                this.$router.push({ name: 'employee' })
+                this.$router.push({ name: 'supplier' })
                 Notification.success()
             })
-            .catch(error =>this.errors = error.response.data.errors)
+            .catch(error =>this.errors = error.response.data.errors )
+        },
+        onFileSelected(event) {
+            let file = event.target.files[0];
+
+            if(file.size > 1048770) {
+                Notification.image_validation();
+            } else {
+                let reader = new FileReader();
+
+                reader.onload = event =>{
+                    this.form.photo = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         },
     },
 }
 </script>
 
 <style type="text/css">
-    #em_photo {
-        height: 240px;
-        width: 200px;
-    }
+
 </style>
