@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ExpenseController;
+use App\Http\Controllers\Api\SalaryController;
 
 Route::group([
 
@@ -25,3 +27,6 @@ Route::resource('/employee', EmployeeController::class);
 Route::resource('/supplier', SupplierController::class);
 Route::resource('/category', CategoryController::class);
 Route::resource('/product', ProductController::class);
+Route::resource('/expense', ExpenseController::class);
+
+Route::Post('/salary/paid/{id}', [SalaryController::class, 'Paid']);
