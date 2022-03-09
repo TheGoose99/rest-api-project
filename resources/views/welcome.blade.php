@@ -81,6 +81,19 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
+                        aria-expanded="true" aria-controls="collapseBootstrap">
+                        <i class="fab fa-product-hunt"></i>
+                        <span>Products</span>
+                        </a>
+                        <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <router-link class="collapse-item" to="/store-product">Add Product</router-link>
+                                <router-link class="collapse-item" to="/product">All Product</router-link>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="forms.html">
                         <i class="fab fa-fw fa-wpforms"></i>
                         <span>Forms</span>
@@ -336,7 +349,20 @@
                 <!---Container Fluid-->
             </div>
 
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>copyright &copy; 2022 -
+                            <b><a href="https://github.com/TheGoose99/rest-api-project" target="_blank">This Project's Repository</a></b>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer -->
+
             </div>
+
         </div>
     </div>
     <!-- Scroll to top -->
@@ -360,6 +386,7 @@
             $("#sidebar").css("display", "");
         }
     </script>
+
 </body>
 
 </html>
