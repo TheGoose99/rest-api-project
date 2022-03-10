@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\StockController;
+use App\Http\Controllers\Api\CustomerController;
 
 Route::group([
 
@@ -37,3 +38,5 @@ Route::Get('/edit/salary/{id}', [SalaryController::class, 'EditSalary']);
 Route::Post('/salary/update/{id}', [SalaryController::class, 'SalaryUpdate']);
 
 Route::PATCH('/stock/update/{id}', [ProductController::class, 'StockUpdate']);
+
+Route::resource('/customer', CustomerController::class);
