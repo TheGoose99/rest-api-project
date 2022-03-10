@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
+use App\Http\Controllers\Api\StockController;
 
 Route::group([
 
@@ -34,3 +35,5 @@ Route::Get('/salary', [SalaryController::class, 'AllSalary']);
 Route::Get('/salary/view/{id}', [SalaryController::class, 'ViewSalary']);
 Route::Get('/edit/salary/{id}', [SalaryController::class, 'EditSalary']);
 Route::Post('/salary/update/{id}', [SalaryController::class, 'SalaryUpdate']);
+
+Route::PATCH('/stock/update/{id}', [ProductController::class, 'StockUpdate']);
