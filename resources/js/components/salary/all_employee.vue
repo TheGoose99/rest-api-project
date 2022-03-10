@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-sm">
-                <router-link to="/store-employee" class="btn btn-primary"> Add Employee </router-link>
+                <router-link to="/salary" class="btn btn-primary"> All Salaries </router-link>
             </div>
         </div>
 
