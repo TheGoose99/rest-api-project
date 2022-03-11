@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\SalaryController;
 use App\Http\Controllers\Api\StockController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\PosController;
+use App\Http\Controllers\Api\CartController;
 
 Route::group([
 
@@ -30,6 +32,7 @@ Route::resource('/supplier', SupplierController::class);
 Route::resource('/category', CategoryController::class);
 Route::resource('/product', ProductController::class);
 Route::resource('/expense', ExpenseController::class);
+Route::resource('/customer', CustomerController::class);
 
 Route::Post('/salary/paid/{id}', [SalaryController::class, 'Paid']);
 Route::Get('/salary', [SalaryController::class, 'AllSalary']);
@@ -39,4 +42,17 @@ Route::Post('/salary/update/{id}', [SalaryController::class, 'SalaryUpdate']);
 
 Route::PATCH('/stock/update/{id}', [ProductController::class, 'StockUpdate']);
 
-Route::resource('/customer', CustomerController::class);
+Route::Get('/getting/product/{id}', [PosController::class, 'GetProduct']);
+
+// Add to cart Route
+Route::Get('/addToCart/{id}', [CartController::class, 'AddToCart']);
+Route::Get('/cart/product', [CartController::class, 'CartProduct']);
+Route::Get('/remove/cart/{id}', [CartController::class, 'removeCart']);
+Route::Get('/increment/{id}', [CartController::class, 'increment']);
+Route::Get('/decrement/{id}', [CartController::class, 'decrement']);
+
+// Vat Route
+Route::Get('/vats/', [CartController::class, 'Vats']);
+
+// Payment Route
+Route::Post('/orderdone', [CartController::class, 'OrderDone']);
