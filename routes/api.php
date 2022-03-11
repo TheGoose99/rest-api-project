@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\StockController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\PosController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
 
 Route::group([
 
@@ -56,3 +57,8 @@ Route::Get('/vats/', [CartController::class, 'Vats']);
 
 // Payment Route
 Route::Post('/orderdone', [CartController::class, 'OrderDone']);
+
+// Order Route
+Route::Get('/orders', [OrderController::class, 'TodayOrder']);
+Route::Get('/order/details/{id}', [OrderController::class, 'OrderDetails']);
+Route::Get('/order/orderdetails/{id}', [OrderController::class, 'OrderDetailsAll']);
